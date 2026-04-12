@@ -4,9 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN pip install --no-cache-dir -r requirements.txt
-
-RUN python3 app/init_db.py
+RUN pip install --no-cache-dir -r requirements.txt && python3 app/init_db.py
 
 EXPOSE 8000
 

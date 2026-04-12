@@ -10,7 +10,7 @@ CREATE_TABLE = """
 CREATE TABLE IF NOT EXISTS blog_posts (
     post_id         INTEGER PRIMARY KEY AUTOINCREMENT,
     post_title    TEXT    NOT NULL,
-    post content  TEXT    NOT NULL,
+    post_content  TEXT    NOT NULL,
     created_date   DATETIME DEFAULT CURRENT_TIMESTAMP,
     modified_date  DATETIME DEFAULT CURRENT_TIMESTAMP
 );
