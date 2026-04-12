@@ -6,6 +6,8 @@ COPY . .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
+RUN python3 app/init_db.py
+
 EXPOSE 8000
 
 CMD ["python3", "app/__init__.py"]
