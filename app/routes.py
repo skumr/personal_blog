@@ -28,6 +28,14 @@ def create_post():
     except Exception as e:
         return e
     
+@web_app_bp.route("/get-last-post", methods=["GET"])
+def get_last_post():
+    try:
+        
+        return jsonify("OK"), 201
+    except Exception as e:
+        return e
+    
 
 
 def setup(app:Flask):
