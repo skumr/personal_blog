@@ -13,16 +13,8 @@ All Posts
             <p>Title: {{ post[1] }}</p>
             <p>Content: {{ post[2] }}</p>
             <button>Edit</button>
-            <dialog id="editModal">
-                <form>
-                    <label for="title">Edit Title</label>
-                    <label>Edit Content</label>
-                </form>
-            </dialog>
-            <button onsubmit="handleDelete(event)">Delete</button>
-            
+            <button>Delete</button>
         </div>
-        
     {% endfor %}
 </body>
 {% endblock %}
