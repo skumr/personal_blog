@@ -1,0 +1,28 @@
+# Ignore OS-specific system files
+.DS_Store
+Thumbs.db
+
+# Ignore environment variables and secrets
+.env
+*.key
+
+# Ignore dependency directories
+node_modules/
+vendor/
+.venv/
+
+# Ignore build artifacts and log files
+dist/
+build/
+*.log
+*.tmp
+
+# Ignore IDE-specific settings
+.vscode/
+.idea/
+*.swp
+
+# Ignore Python byte-code and cache files
+__pycache__/
+*.py[cod]
+*$py.class
