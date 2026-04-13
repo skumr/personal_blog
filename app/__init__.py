@@ -1,12 +1,11 @@
 from flask import Flask
+from flask_cors import CORS
+
 from init_db import create_table
 from routes import setup
 
-web_app = Flask(
-    "web_app",
-    template_folder="app/templates",
-    static_folder="app/static",
-)
+web_app = Flask(__name__)
+CORS(web_app)
 
 create_table()
 setup(web_app)
