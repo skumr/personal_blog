@@ -44,6 +44,20 @@ def create_post():
     except Exception as e:
         return e
     
+@web_app_bp.route("/edit-post", methods=["UPDATE"])
+def edit_post():
+    try:
+        pass
+    except Exception as e:
+        return e
+    
+@web_app_bp.route("/delete-post", methods=["DELETE"])
+def delete_post():
+    try:
+        pass
+    except Exception as e:
+        return e
+    
 
 @web_app_bp.route("/get-last-post", methods=["GET"])
 def get_last_post():

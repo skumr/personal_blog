@@ -20,13 +20,27 @@ def set_post(title: str, content: str):
     except Exception as e:
         return e
 
+def update_post(title: str, content: str):
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute()
+    except Exception as e:
+        return e
+
+def delete_post():
+    try:
+        pass
+    except Exception as e:
+        return e
+
 def fetch_last_post():
     try:
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
         cursor.execute(
             """
-                SELECT post_title, post_content FROM blog_posts ORDER BY post_id DESC LIMIT 1;
+                SELECT post_id, post_title, post_content, created_date FROM blog_posts ORDER BY post_id DESC LIMIT 1;
             """
         )
         last_post = cursor.fetchall()
@@ -41,7 +55,7 @@ def fetch_all_posts():
         cursor = conn.cursor()
         cursor.execute(
             """
-                SELECT post_title, post_content FROM blog_posts;
+                SELECT post_id, post_title, post_content, created_date FROM blog_posts ORDER BY post_id DESC LIMIT 10;
             """
         )
         all_posts = cursor.fetchall()

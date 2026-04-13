@@ -5,16 +5,24 @@ All Posts
 {% endblock %}
 
 {% block content %}
-<h1>This is where you can find all of my posts</h1>
-<section id="post-content">
-    <ul>
-        {% for item in all_posts %}
-            <li>Title:{{ item[0] }}
-                <br>
-                Content: {{ item[1] }}
-            </li>
-        {% endfor %}
-    </ul>
-
-</section>
+<body>
+    <h1>All Blog Posts</h1>
+    {% for post in all_posts %}
+        <div class="post">
+            <b>#{{ post[0] }}</b>
+            <p>Title: {{ post[1] }}</p>
+            <p>Content: {{ post[2] }}</p>
+            <button>Edit</button>
+            <dialog id="editModal">
+                <form>
+                    <label for="title">Edit Title</label>
+                    <label>Edit Content</label>
+                </form>
+            </dialog>
+            <button onsubmit="handleDelete(event)">Delete</button>
+            
+        </div>
+        
+    {% endfor %}
+</body>
 {% endblock %}
