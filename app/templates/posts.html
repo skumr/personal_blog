@@ -6,10 +6,13 @@ All Posts
 
 {% block content %}
 <h1>This is where you can find all of my posts</h1>
-<section class="post-content">
+<section id="post-content">
     <ul>
         {% for item in all_posts %}
-            <li>{{ item }}</li>
+            <li>Title:{{ item[0] }}
+                <br>
+                Content: {{ item[1] }}
+            </li>
         {% endfor %}
     </ul>
 

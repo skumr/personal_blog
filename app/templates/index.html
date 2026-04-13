@@ -6,15 +6,31 @@ Home
 
 {% block content %}
 <h1>Welcome to My Blog</h1>
-<h2>This is the home page...</h2>
-<p>Blogs coming soon!</p>
-<form target="_blank" action="/create-post" method="post">
+<br>
+<h3>Last blog post: </h3>
+<section id="last-post">
+    <p>Title: {{ last_post[0][0] }}</p>
+    <p>Post: {{ last_post[0][1] }}</p>
+</section>
+<br>
+<h3>Submit a blog post below!</h3>
+<form 
+    id="blog-form" 
+    action="/create-post" 
+    method="post"
+>
     <label for="title">Title:</label>
     <input type="text" name="post-title" placeholder="Enter title">
 
-    <label for="content">Conent:</label>
+    <label for="content">Content:</label>
     <input type="text" name="post-content" placeholder="What would you like to post today?">
     
-    <button type="submit">Create Post</button>
+    <button type="submit" onsubmit="handleForm(event)">Create Post</button>
 </form>
+<script>
+    function handleForm(event) {
+        //event.preventDefault();
+        event.target.reset();
+    } 
+</script>
 {% endblock %}
