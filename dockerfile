@@ -8,4 +8,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8000
 
-CMD ["python3", "app/__init__.py"]
+CMD ["python3", "backend/__init__.py"]
