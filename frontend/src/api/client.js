@@ -33,6 +33,15 @@ export async function createPost(title, content) {
   return handleJson(response);
 }
 
+export async function editPost(title, content, postId) {
+  const response = await fetch(`${API_BASE}/edit-post`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ title, content, postId}),
+  });
+  return handleJson(response);
+}
+
 export async function deletePost(postId) {
   const response = await fetch(`${API_BASE}/delete-post`, {
     method: 'DELETE',

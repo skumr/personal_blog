@@ -44,10 +44,15 @@ export function Posts() {
     return <ErrorMessage message={error} />;
   } 
 
+  function handleEditPost(updatedPost) {
+    setPosts((prevPosts) =>
+      prevPosts.map((p) =>
+        p.post_id === updatedPost.post_id ? updatedPost : p));
+  }
+
   function handleDeletePost(deletedId) {
     setPosts((prevPosts) =>
-      prevPosts.filter((p) => p.post_id !== deletedId)
-      );
+      prevPosts.filter((p) => p.post_id !== deletedId));
   }
 
   return (
@@ -55,7 +60,12 @@ export function Posts() {
       {posts.length === 0 ? (
         <p>No posts yet.</p>
       ) : (
-        posts.map((post) => <PostCard key={post.post_id} post={post} onDelete={handleDeletePost}/> )
+        posts.map((post) => 
+        <PostCard 
+          key={post.post_id} 
+          post={post} 
+          onEdit={handleEditPost}
+          onDelete={handleDeletePost}/> )
       )
       
       }

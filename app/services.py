@@ -20,11 +20,22 @@ def set_post(title: str, content: str):
     except Exception as e:
         return e
 
-def update_post(title: str, content: str):
+def update_post(title: str, content: str, post_id: str):
     try:
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
-        cursor.execute()
+        cursor.execute(
+            """
+                UPDATE blog_posts 
+                SET post_title = ?, post_content = ? 
+                WHERE post_id = ?;
+            """, (title, content, post_id,)
+        )
+        conn.commit()
+        udpated_count = cursor.rowcount
+        conn.close()
+        return udpated_count
+
     except Exception as e:
         return e
 

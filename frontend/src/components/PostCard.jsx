@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import { deletePost } from '../api/client';
+import { editPost, deletePost } from '../api/client';
 
 Modal.setAppElement('#root');
 
@@ -17,14 +17,47 @@ const modalCustomStyles = {
   }
 }
 
-export function PostCard({ post, onDelete }) {
+export function PostCard({ post, onEdit, onDelete }) {
 
   const [isEdit, setIsEdit] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
+  const [newTitle, setNewTitle] = useState('');
+  const [newContent, setNewContent] = useState('');
+  
+  const [editError, setEditError] = useState(false);
   const [deleteError, setDeleteError] = useState(null);
 
-  const toggleEditModal = () => setIsEdit(!isEdit);
+  const toggleEditModal = () => {
+    setNewTitle(post.post_title);
+    setNewContent(post.post_content);
+    setIsEdit(!isEdit);
+  };
+
   const toggleDeleteModal = () => setIsDelete(!isDelete);
+
+  async function handleEdit(event) {
+    event.preventDefault();
+    setEditError(null);
+
+    const post_id = post.post_id;
+
+    if (!post_id) {
+      setEditError('Could not edit post - wrong/missing post_id');
+      return;
+    }
+    try {
+      await editPost(newTitle, newContent, post_id);
+      onEdit({ 
+        ...post, 
+        post_title: newTitle, 
+        post_content: newContent 
+      });
+      setIsEdit(false);
+
+    } catch (e) {
+      setEditError(e.message);
+    }
+  }
 
   async function handleDelete(event) {
     event.preventDefault();
@@ -59,11 +92,7 @@ export function PostCard({ post, onDelete }) {
       </p>
       <p>{post.post_content}</p>
       <div id='edit-modal' >
-        <button
-          onClick={toggleEditModal}
-          id='edit-btn'
-          type='button'
-        >
+        <button onClick={toggleEditModal} id='edit-btn' type='button'>
           Edit
         </button>
         {isEdit && (
@@ -72,14 +101,34 @@ export function PostCard({ post, onDelete }) {
             onRequestClose={() => setIsEdit(false)}
             ariaHideApp={!isEdit}
             style={modalCustomStyles}
-          > 
+          >
+            <form>
+              <div>
+                <input
+                  id='edit-post-content'
+                  value={newTitle}
+                  onChange={(e) => setNewTitle(e.target.value)}
+                ></input>
+              </div>
+              <div>
+                <textarea
+                  id="post-content"
+                  type="text"
+                  value={newContent}
+                  style={{width: "600px", resize: 'none'}}
+                  rows={10}
+                  onChange={(e) => setNewContent(e.target.value)}
+                />
+              </div>
+              <button type='submit' onClick={handleEdit} style={{ display: 'flex', justifyContent: 'flex-end', marginLeft: 'auto'}}>Save Edit</button>
+            </form>
             
-            
-            <button onClick={() => setIsEdit(false)}>X</button>
+            <button onClick={() => setIsEdit(false)}>No</button>
+            {editError && <p style={{ color: 'red' }}>{editError}</p>}
           </Modal>
         )}
       </div>
-      <div>
+      <div id='delete-modal'>
         <button
           onClick={toggleDeleteModal}
           id='edit-btn'
