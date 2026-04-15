@@ -1,28 +1,57 @@
-# Ignore OS-specific system files
+# =========================
+# OS-specific files
+# =========================
 .DS_Store
 Thumbs.db
 
-# Ignore environment variables and secrets
+# =========================
+# Environment variables & secrets
+# =========================
 .env
+.env.*
 *.key
+*.pem
+*.crt
 
-# Ignore dependency directories
+# =========================
+# Dependencies
+# =========================
 node_modules/
 vendor/
 .venv/
+venv/
+env/
 
-# Ignore build artifacts and log files
+# =========================
+# Build artifacts & outputs
+# =========================
 dist/
 build/
+out/
 *.log
 *.tmp
+coverage/
+*.tsbuildinfo
 
-# Ignore IDE-specific settings
+# =========================
+# IDE / editor settings
+# =========================
 .vscode/
 .idea/
 *.swp
+*.swo
 
-# Ignore Python byte-code and cache files
+# =========================
+# Python cache & bytecode
+# =========================
 __pycache__/
 *.py[cod]
 *$py.class
+.pytest_cache/
+.mypy_cache/
+
+# =========================
+# Optional: system / misc
+# =========================
+*.bak
+*.orig
