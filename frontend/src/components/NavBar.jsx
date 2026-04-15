@@ -12,37 +12,26 @@ export function NavBar() {
     }
 
     return (
-        <>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
-                <h1 id='page-header'>{pages[location.pathname] || 'Page Not Found'}</h1>
-                <nav>
-                    <div className='dropdown'>
-                        <button 
-                            onClick={toggleDropdown} 
-                            id="dropdown-btn"
-                            type='button'
-                        >
-                            <IoMenuOutline size={25} style={{ }}/>
-                        </button>
-                        {isOpen && (
-                            <ul id='nav-menu'>
-                                <Link reloadDocument to="/" style={{ marginRight: '1rem' }}>
-                                    Home
-                                </Link>
-                                <Link reloadDocument to="/posts" style={{ marginRight: '1rem' }}>
-                                    Posts
-                                </Link>
-                                <Link reloadDocument to="/about">About</Link> 
-                            </ul>
-                        )}
-                    </div>
-                </nav>
+        <div id="navbar">
+            <h1 id="page-header">
+            {pages[location.pathname] || 'Page Not Found'}
+            </h1>
+
+            <div id="header-nav">
+            <div id="dropdown">
+                <button onClick={toggleDropdown} type="button">
+                <IoMenuOutline size={25} />
+                </button>
+
+                {isOpen && (
+                <ul id="nav-menu">
+                    <Link id="nav-link" reloadDocument to="/">Home</Link>
+                    <Link id="nav-link" reloadDocument to="/posts">Posts</Link>
+                    <Link id="nav-link" reloadDocument to="/about">About</Link>
+                </ul>
+                )}
             </div>
-            
-        </>
-        
-        
-        
-        
+            </div>
+        </div>
     );
 }

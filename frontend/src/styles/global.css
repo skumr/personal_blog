@@ -20,24 +20,43 @@ footer {
   border-width: 1px;
 }
 
-nav {
-  display: flex;
-  justify-content: left;
-  padding: 1rem;
-  flex-direction: column;
-  
-}
-
 article {
   font-style: italic;
 }
 
+/* NAVBAR STYLES */
+#navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+#dropdown {
+  padding: 0;
+}
+
+#dropdown {
+  position: relative;
+}
+
 #nav-menu {
-  list-style-type: none;
-  list-style-position: inside;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  z-index: 1000;
 }
 
 #page-header {
-  display: inline;
-  padding: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+#nav-link {
+  padding-bottom: 1rem;
 }
