@@ -1,12 +1,43 @@
-* {
-  box-sizing: border-box;
-}
+
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
 }
+
 main {
   max-width: 40rem;
   margin: 0 auto;
   padding: 1rem;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  border-style: solid;
+  border-color: #ccc;
+  border-bottom: 0px;
+  border-width: 1px;
+}
+
+nav {
+  display: flex;
+  justify-content: left;
+  padding: 1rem;
+  flex-direction: column;
+  
+}
+
+article {
+  font-style: italic;
+}
+
+#nav-menu {
+  list-style-type: none;
+  list-style-position: inside;
+}
+
+#page-header {
+  display: inline;
+  padding: 20px;
 }

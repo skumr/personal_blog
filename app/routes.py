@@ -1,5 +1,5 @@
 from flask import Flask, Blueprint, request, jsonify
-from services import set_post, fetch_all_posts, fetch_last_post
+from services import set_post, fetch_all_posts, fetch_last_post, delete_post
 import logging
 
 logger = logging.getLogger()
@@ -68,9 +68,23 @@ def edit_post():
 
 
 @web_app_bp.route("/delete-post", methods=["DELETE"])
-def delete_post():
+def delete_blog_post():
     try:
-        return jsonify({"error": "not implemented"}), 501
+        data = request.get_json(silent=True) or {}
+        post_id = data.get("post_id") or data.get("postId")
+
+        if not post_id:
+            return jsonify({"error": "post_id is required"}), 400
+
+        result = delete_post(str(post_id))
+
+        if isinstance(result, Exception):
+            return jsonify({"error": str(result)}), 500
+
+        if result == 0:
+            return jsonify({"error": "Post not found"}), 404
+
+        return jsonify({"success": True,"deleted_post_id": post_id}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

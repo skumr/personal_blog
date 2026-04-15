@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getHome, createPost } from '../api/client.js';
 import { Loading } from '../components/Loading.jsx';
 import { ErrorMessage } from '../components/ErrorMessage.jsx';
+import { LastPostCard } from '../components/LastPostCard.jsx'
 
 export function Home() {
   const [lastPost, setLastPost] = useState(null);
@@ -14,12 +15,12 @@ export function Home() {
   const [formError, setFormError] = useState(null);
 
   useEffect(() => {
-    let cancelled = false;
+    let completed = false;
 
     async function load() {
       try {
         const result = await getHome();
-        if (!cancelled) {
+        if (!completed) {
           setLastPost(result.last_post);
           setError(null);
         }
@@ -28,7 +29,7 @@ export function Home() {
           setError(e.message);
         }
       } finally {
-        if (!cancelled) {
+        if (!completed) {
           setLoading(false);
         }
       }
@@ -36,7 +37,7 @@ export function Home() {
 
     load();
     return () => {
-      cancelled = true;
+      completed = true;
     };
   }, []);
 
@@ -69,55 +70,53 @@ export function Home() {
   }
 
   return (
-    <>
-      <h1>Welcome to My Blog</h1>
-
-      <h2>Latest post</h2>
-      {lastPost ? (
-        <article>
-          <header>
-            <p>Title: {lastPost.post_title}</p>
-            <p>
-              Published:{' '}
-              <time dateTime={lastPost.created_date}>
-                {lastPost.created_date} UTC
-              </time>
-            </p>
-          </header>
-          <section>
-            <p>Post: {lastPost.post_content}</p>
-          </section>
-        </article>
-      ) : (
-        <p>No posts yet.</p>
-      )}
-
-      <h3>Submit a blog post</h3>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="post-title">Post Title: </label>
-          <input
-            id="post-title"
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            disabled={saving}
-          />
-        </div>
-        <div>
-          <label htmlFor="post-content">Content: </label>
-          <textarea
-            id="post-content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            disabled={saving}
-            rows={5}
-          />
-        </div>
-        <button type="submit" disabled={saving}>
-          {saving ? 'Saving…' : 'Create Post'}
-        </button>
-      </form>
+    <> 
+      <h3>Last Blog Post -</h3>
+      <LastPostCard post={lastPost}/>
+      
+      <h3>Submit a Blog Post -</h3>
+      <article
+        id='new-post'
+        style={{
+          border: '1px solid #ddd',
+          padding: '1rem',
+          marginBottom: '1rem',
+        }}
+      >
+        <form onSubmit={handleSubmit}>
+          <div className='post-title-input' style={{marginBottom: '1rem'}}>
+            <input
+              id="post-title"
+              type="text"
+              value={title}
+              placeholder='Enter post title here!'
+              onChange={(e) => setTitle(e.target.value)}
+              disabled={saving}
+              
+              required
+              style={{width: "600px"}}
+            />
+          </div>
+          <div className='post-content-input' style={{marginBottom: '1rem'}}>
+            <textarea
+              id="post-content"
+              type="text"
+              value={content}
+              placeholder='Say what you have to say!'
+              style={{width: "600px", resize: 'none'}}
+              rows={10}
+              onChange={(e) => setContent(e.target.value)}
+              required
+              disabled={saving}
+            />
+          </div>
+          <button type="submit" disabled={saving} style={{ display: 'flex', justifyContent: 'flex-end', marginLeft: 'auto'}}>
+            {saving ? 'Saving…' : 'Submit'}
+          </button>
+          
+        </form>
+      </article>
+      
       {formError ? <ErrorMessage message={formError} /> : null}
     </>
   );

@@ -28,9 +28,23 @@ def update_post(title: str, content: str):
     except Exception as e:
         return e
 
-def delete_post():
+def delete_post(post_id):
     try:
-        pass
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        
+        cursor.execute(
+            """
+            DELETE FROM blog_posts WHERE post_id = ?;
+            """,
+            (post_id,)
+        )
+
+        conn.commit()
+        deleted_count = cursor.rowcount
+        conn.close()
+        return deleted_count
+
     except Exception as e:
         return e
 

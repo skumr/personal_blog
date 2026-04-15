@@ -19,11 +19,25 @@ export async function getAllPosts() {
   return handleJson(response);
 }
 
+export async function getLastPost() {
+  const response = await fetch(`${API_BASE}/get-last-post`);
+  return handleJson(response);
+}
+
 export async function createPost(title, content) {
   const response = await fetch(`${API_BASE}/create-post`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ title, content }),
+  });
+  return handleJson(response);
+}
+
+export async function deletePost(postId) {
+  const response = await fetch(`${API_BASE}/delete-post`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ postId }),
   });
   return handleJson(response);
 }

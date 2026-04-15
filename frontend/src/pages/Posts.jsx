@@ -42,16 +42,25 @@ export function Posts() {
 
   if (error) {
     return <ErrorMessage message={error} />;
+  } 
+
+  function handleDeletePost(deletedId) {
+    setPosts((prevPosts) =>
+      prevPosts.filter((p) => p.post_id !== deletedId)
+      );
   }
 
   return (
     <>
-      <h1>All Blog Posts</h1>
       {posts.length === 0 ? (
         <p>No posts yet.</p>
       ) : (
-        posts.map((post) => <PostCard key={post.post_id} post={post} />)
-      )}
+        posts.map((post) => <PostCard key={post.post_id} post={post} onDelete={handleDeletePost}/> )
+      )
+      
+      }
+      
+      
     </>
   );
 }

@@ -7,9 +7,9 @@ export function About() {
         marginBottom: '1rem',
       }}
     >
-      <h2>About Me</h2>
+      <p><strong>Hey everyone, welcome to my blog!</strong></p>
       <p>
-        Hey everyone, welcome to my blog! I started this blog site as a personal project to engage in frontend/backend web development.
+        I started this blog site as a personal project to engage in frontend/backend web development.
         Follow my posts here on my journey documenting my development projects and thoughts, as I work through problems and find solutions!
       </p>
     </article>
