@@ -49,6 +49,7 @@ __pycache__/
 *$py.class
 .pytest_cache/
 .mypy_cache/
+.parcel-cache/
 
 # =========================
 # Optional: system / misc
